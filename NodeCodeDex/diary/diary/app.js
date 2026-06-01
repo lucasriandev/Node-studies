@@ -1,11 +1,10 @@
 const fs = require("fs");
 
-const mensagem = "TESTANDO ARQUIVO";
-
-fs.writeFile("teste.txt", mensagem, (err) => {
+fs.unlink("seventh-grade.txt", (err) => {
   if (err) {
-    console.log("erro ao salvar arquivo", err);
+    console.log("Erro ao deletar", err);
+    return;
   } else {
-    console.log("arquivo salvo");
+    console.log("seventh foi deletado com sucesso");
   }
 });
