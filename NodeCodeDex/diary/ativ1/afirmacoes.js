@@ -25,3 +25,23 @@ function saveRandomAffirmationToDesktop() {
 }
 
 saveRandomAffirmationToDesktop();
+
+/* Programa inicia
+        ↓
+Carrega fs, path e os
+        ↓
+Cria array de frases
+        ↓
+Descobre Desktop
+        ↓
+Chama a função
+        ↓
+Sorteia uma frase
+        ↓
+Monta o caminho do arquivo
+        ↓
+Cria/reescreve teste.txt
+        ↓
+Salva a frase
+        ↓
+Mostra sucesso ou erro */
