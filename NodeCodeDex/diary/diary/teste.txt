@@ -1,1 +1,12 @@
-TESTANDO ARQUIVO
+// Write the random affirmation to a new file on the desktop (this will overwrite it)
+  fs.writeFile(newFilePath, randomAffirmation, (err) => {
+    if (err) {
+      console.error('Error writing the affirmation to the file:', err);
+    } else {
+      console.log('Random affirmation saved to:', newFilePath);
+    }
+  });
+
+
+// Call the function to get and save a random affirmation
+saveRandomAffirmationToDesktop();
