@@ -1,8 +1,10 @@
 const http = require("http");
 
 const server = http.createServer((req, res) => {
-  res.write("Hello word");
-  res.end();
+  res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+  res.end("❌❌❌");
 });
 
-server.listen(3000);
+server.listen(3000, () => {
+  console.log("Servidor funcionando");
+});
