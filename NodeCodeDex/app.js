@@ -6,15 +6,11 @@ const server = http.createServer((req, res) => {
   let content = "";
 
   if (req.url === "/") {
-    content = "<h1>Home</h1>";
-  } else if (req.url === "/a") {
-    content = "<h1>Sala de aula</h1>";
+    content = "<h1>Pagina inicial";
   }
 
-  res.writeHead(statusCode, { "content-type": contentType });
+  res.writeHead(statusCode, { "Content-Type": contentType });
   res.end(content);
 });
 
-server.listen(3000, () => {
-  console.log("Servidor funcionando");
-});
+server.listen(3000, () => [console.log("Servidor ligado!")]);
