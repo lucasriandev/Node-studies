@@ -1,22 +1,22 @@
 const http = require("http");
 
 const server = http.createServer((req, res) => {
-  let codeStatus = 200;
+  let statusCode = 200;
   let contentType = "text/html; charset=utf-8";
   let content = "";
 
   if (req.url === "/") {
-    content = "<h1>Pagina inicial</h1>";
-  } else if (req.url === "/contato") {
-    content = "<h1>Contato!</h1>";
+    content = "<h1>Pagina inicial!</h1>";
+  } else if (req.url === "/messi") {
+    content = "<h1>Melhor do mundo!</h1>";
   }
 
-  res.writeHead(codeStatus, { "Content-Type": contentType });
+  res.writeHead(statusCode, { "Content-Type": contentType });
   res.end(content);
 });
 
 server.listen(3000, () => {
-  console.log("Server ativo!");
+  console.log("Servidor ativo!");
 });
 
 /*const http = require("http");
