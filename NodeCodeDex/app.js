@@ -2,8 +2,16 @@ const http = require("http");
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
-    res.write("Hello word");
-    res.end();
+    console.log(req.url);
+    console.log(req.method);
+
+    res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("hello word");
+  } else if (req.url === "/teste") {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.end(`<h1>Teste de clique</h1>
+      <button>Clique</button>
+      `);
   }
 });
 
