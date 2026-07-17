@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.text());
 
-let mensagem = "";
+let mensagem = [];
 
 app.get("/", (req, res) => {
   res.setHeader("Content-Type", "text/plain");
@@ -11,12 +11,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  mensagem = req.body;
+  mensagem.push(req.body);
   console.log(`Mensagem gravada: ${mensagem}`);
   res.end(`${mensagem}`);
 });
 
-app.put("/", (req, res) => {
+app.put("/1", (req, res) => {
   console.log(`Mensagem antiga: ${mensagem}`);
   mensagem = req.body;
   console.log(`Mensagem nova: ${mensagem}`);
