@@ -1,5 +1,3 @@
-//curl.exe -X POST http://localhost:3000 -H "Content-Type: text/plain" -d "frolic-fan"
-
 const express = require("express");
 const app = express();
 
@@ -9,15 +7,22 @@ let mensagem = "";
 
 app.get("/", (req, res) => {
   res.setHeader("Content-Type", "text/plain");
-  res.send(`Mensagem gravada no post foi:  ${mensagem}`);
+  res.end(`Mensagem gravada: ${mensagem}`);
 });
 
 app.post("/", (req, res) => {
   mensagem = req.body;
-  console.log(`Mensagem enviada ${mensagem}`);
-  res.send(`${mensagem}`);
+  console.log(`Mensagem gravada: ${mensagem}`);
+  res.end(`${mensagem}`);
+});
+
+app.put("/", (req, res) => {
+  console.log(`Mensagem antiga: ${mensagem}`);
+  mensagem = req.body;
+  console.log(`Mensagem nova: ${mensagem}`);
+  res.end(`${mensagem}`);
 });
 
 app.listen(3000, () => {
-  console.log("Server ativo!");
+  console.log("Server ativado!");
 });
