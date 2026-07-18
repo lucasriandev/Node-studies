@@ -12,17 +12,22 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   mensagem.push(req.body);
-  console.log(`Mensagem gravada: ${mensagem}`);
+  console.log(`Mensagem enviada ${mensagem}`);
   res.end(`${mensagem}`);
 });
 
-app.put("/1", (req, res) => {
-  console.log(`Mensagem antiga: ${mensagem}`);
+app.put("/", (req, res) => {
   mensagem = req.body;
   console.log(`Mensagem nova: ${mensagem}`);
-  res.end(`${mensagem}`);
+  res.end(`Mensagem do put: ${mensagem}`);
+});
+
+app.patch("/", (req, res) => {
+  mensagem += req.body;
+  console.log(`Mensagem do patch: ${mensagem}`);
+  res.end(`Mensagem do patch: ${mensagem}`);
 });
 
 app.listen(3000, () => {
-  console.log("Server ativado!");
+  console.log("Servidor ligado!");
 });
