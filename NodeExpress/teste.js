@@ -19,6 +19,7 @@ app.post("/", (req, res) => {
 app.put("/", (req, res) => {
   mensagem = req.body;
   console.log(`Mensagem do put: ${mensagem}`);
+  res.setHeader("Content-Type", "text/plain");
   res.end(`Mensagem gravada do put: ${mensagem}`);
 });
 
@@ -31,6 +32,10 @@ app.patch("/", (req, res) => {
 app.delete("/", (req, res) => {
   mensagem = ["Lucas"];
   res.end(`Post e alterações apagadas`);
+});
+
+app.use((req, res) => {
+  res.status(404).send("Volte ao terminal");
 });
 
 app.listen(3000, () => {
