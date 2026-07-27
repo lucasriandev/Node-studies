@@ -18,12 +18,24 @@ app.post("/", (req, res) => {
 app.put("/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
-  if (!mensagem.id) {
-    res.status(404).json({ erro: "Mensagem nao encontrada!" });
+  if (!mensagem[id]) {
+    return res.status(404).json({ erro: "Mensagem nao encontrada!" });
   }
 
   mensagem[id] = req.body;
   //"Abra a gaveta de número id e coloque lá dentro o novo objeto que veio no req.body (substituindo o que estava lá antes)."
+  res.json({ status: "Sucesso", dados: mensagem[id] });
+});
+
+app.patch("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  if (!mensagem[id]) {
+    return res.status(404).json({ error: "Mensagem não encontrada!" });
+  }
+
+  mensagem[id] = { ...mensagem[id], ...req.body };
+
   res.json({ status: "Sucesso", dados: mensagem[id] });
 });
 
