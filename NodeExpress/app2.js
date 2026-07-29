@@ -5,16 +5,16 @@
 const express = require("express");
 const app = express();
 
-let mensagem = "";
+app.use(express.json());
 
-app.use(express.text());
+const mensagem = [];
 
 app.post("/", (req, res) => {
-  mensagem = req.body;
-  console.log(`Esta mensagem foi gravada ${mensagem}`);
-  res.send(`MENSAGEM GRAVADA ${mensagem}`);
+  const novaMsg = req.body;
+  mensagem.push(novaMsg);
+  res.status(201).json({ status: "Sucesso", dados: mensagem });
 });
 
 app.listen(3000, () => {
-  console.log("Server ativado!");
+  console.log("Servidor ativo!");
 });
