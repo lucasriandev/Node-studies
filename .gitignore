@@ -1,1 +1,7 @@
 node_modules/
+.env
+prisma/dev.db
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
