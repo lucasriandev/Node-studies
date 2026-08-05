@@ -9,5 +9,6 @@ datasource db {
 model Mensagem {
   id        Int      @id @default(autoincrement())
   texto     String
+  idade     Int      // <-- Nova coluna adicionada na planta!
   criadoEm  DateTime @default(now())
 }

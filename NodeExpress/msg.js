@@ -13,22 +13,51 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { texto } = req.body;
+  const { texto, idade } = req.body;
 
   const novaMsg = await prisma.mensagem.create({
     data: {
       texto: texto,
+      idade: idade,
     },
   });
   res.status(201).json({ status: "Sucesso", mensagemCriada: novaMsg });
 });
 
-router.delete("/", async (req, res) => {
-  await prisma.mensagem.deleteMany();
-  res.json({
-    status: "Sucesso",
-    detalhe: "Todas as mensagens apagadas do banco",
-  });
+router.put("/:id", async (req, res) => {
+  const idMsg = Number(req.params.id);
+  const { texto } = req.body;
+
+  try {
+    const mensagemAtualizada = await prisma.mensagem.update({
+      where: {
+        id: idMsg,
+      },
+      data: {
+        texto: texto,
+      },
+    });
+    res.status(201).json({ status: "Sucesso", dados: mensagemAtualizada });
+  } catch (error) {
+    res.status(404).json({ error: "Mensagem nao encontrada para atualizar" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const idMsg = Number(req.params.id);
+
+  try {
+    await prisma.mensagem.delete({
+      where: {
+        id: idMsg,
+      },
+    });
+    res
+      .status(404)
+      .json({ status: "Sucesso", detalhe: `Mensagem ${idMsg} apagada` });
+  } catch (error) {
+    res.status(404).json({ error: "Mensagem não encontrada para deletar" });
+  }
 });
 
 module.exports = router;
