@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const idMsg = Number(req.params.id);
-  const { texto } = req.body;
+  const { texto, idade } = req.body;
 
   try {
     const mensagemAtualizada = await prisma.mensagem.update({
@@ -35,11 +35,26 @@ router.put("/:id", async (req, res) => {
       },
       data: {
         texto: texto,
+        idade: idade,
       },
     });
     res.status(201).json({ status: "Sucesso", dados: mensagemAtualizada });
   } catch (error) {
     res.status(404).json({ error: "Mensagem nao encontrada para atualizar" });
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  const { texto } = req.body;
+
+  try {
+    const msg = await prisma.mensagem.update({
+      data: {
+        texto: texto,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({ error: "Erro no patch" });
   }
 });
 
