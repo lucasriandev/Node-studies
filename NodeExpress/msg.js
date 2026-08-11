@@ -2,10 +2,16 @@ require("dotenv/config");
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3");
+const { z } = require("zod");
 const router = express.Router();
 
 const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
+
+const mensagemSchema = z.object({
+  texto: z.string().min(3, "O texto precisa ter no minimo 3 letras"),
+  idade: z.number().int().positive("A idade precisa ser um numero positivo"),
+});
 
 router.get("/", async (req, res) => {
   const todasMsg = await prisma.mensagem.findMany();
@@ -13,15 +19,24 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { texto, idade } = req.body;
+  try {
+    const mensagemValidade = mensagemSchema.parse(req.body);
 
-  const novaMsg = await prisma.mensagem.create({
-    data: {
-      texto: texto,
-      idade: idade,
-    },
-  });
-  res.status(201).json({ status: "Sucesso", mensagemCriada: novaMsg });
+    const novaMsg = await prisma.mensagem.create({
+      data: {
+        texto: mensagemValidade.texto,
+        idade: mensagemValidade.idade,
+      },
+    });
+    res.status(201).json(novaMsg);
+  } catch (erro) {
+    res
+      .status(404)
+      .json({
+        erro: "Dados inválidos barrados pelo segurança!",
+        detalhes: erro.error,
+      });
+  }
 });
 
 router.put("/:id", async (req, res) => {
