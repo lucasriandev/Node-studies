@@ -15,6 +15,7 @@ datasource db {
 
 model Personagem {
   id        Int      @id @default(autoincrement())
-  texto     String
+  nome      String
+  poder     String
   criadoEm  DateTime @default(now())
 }

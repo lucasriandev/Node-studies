@@ -1,9 +1,13 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 
-const rotasPersonagens = require("./personagens");
+app.use(cors());
 
 app.use(express.json());
+
+const rotasPersonagens = require("./personagens");
 
 app.use("/personagem", rotasPersonagens);
 
