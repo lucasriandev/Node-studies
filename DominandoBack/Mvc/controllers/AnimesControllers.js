@@ -1,4 +1,5 @@
 const { z } = require("zod");
+const prisma = require("../lib/prisma");
 
 const mensagemSchema = z.object({
   nome: z.string().min(3, "Anime precisa ter mais de 3 letras"),
@@ -28,3 +29,4 @@ module.exports = {
   get,
   post,
 };
+
