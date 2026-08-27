@@ -1,4 +1,5 @@
 const { z } = require("zod");
+const prisma = require("../prisma");
 
 const mensagemSchema = z.object({
   email: z.string().min(3, "Email errado!"),
