@@ -24,7 +24,8 @@ const post = async (req, res) => {
 
     res.status(201).json({ novoCadastro });
   } catch (error) {
-    res.status(404).json({ status: "erro no post", error });
+    console.log(error); // mostra o erro completo no terminal
+    res.status(400).json({ status: "erro no post", error: error.message });
   }
 };
 
