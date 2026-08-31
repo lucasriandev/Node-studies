@@ -3,7 +3,7 @@ const prisma = require("../prisma.js");
 
 const mensagemSchema = z.object({
   email: z.string().min(3, "Email errado!"),
-  senha: z.number().int().positive("Senha precisa ser numero positivo!"),
+  senha: z.coerce.number().int().positive("Senha precisa ser numero positivo!"),
 });
 
 const get = async (req, res) => {
