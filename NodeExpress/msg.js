@@ -30,12 +30,10 @@ router.post("/", async (req, res) => {
     });
     res.status(201).json(novaMsg);
   } catch (erro) {
-    res
-      .status(404)
-      .json({
-        erro: "Dados inválidos barrados pelo segurança!",
-        detalhes: erro.error,
-      });
+    res.status(404).json({
+      erro: "Dados inválidos barrados pelo segurança!",
+      detalhes: erro.error,
+    });
   }
 });
 
@@ -58,6 +56,32 @@ router.put("/:id", async (req, res) => {
     res.status(404).json({ error: "Mensagem nao encontrada para atualizar" });
   }
 });
+
+/* USUÁRIO
+   ↓
+clica em editar personagem 5
+   ↓
+React
+   ↓
+idEditado = 5
+   ↓
+PUT /personagem/5
+   ↓
+             ┌───────────────┐
+             │               │
+             ▼               ▼
+      req.params.id      req.body
+           "5"        {nome, poder}
+             │               │
+             └───────┬───────┘
+                     ▼
+                  Express
+                     ↓
+                   Prisma
+                     ↓
+                  BANCO
+                     ↓
+              atualiza ID 5*/
 
 router.patch("/:id", async (req, res) => {
   const { texto } = req.body;
