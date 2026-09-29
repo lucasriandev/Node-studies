@@ -12,3 +12,6 @@ app.use("/animes", rotasAnimes);
 app.listen(3000, () => {
   console.log("Servidor ligado");
 });
+
+//para iniciar um projeto
+//npm init -y && npm install express cors zod && npm install -D nodemon
