@@ -3,6 +3,8 @@ import { prisma } from "./infra/database/prisma.js";
 import { PrismaUserRepository } from "./infra/repositories/PrismaUserRepository.js";
 import { CreateUserUseCase } from "./application/use-cases/CreateUserUseCase.js";
 import { CreateUserController } from "./presentation/controllers/CreateUserController.js";
+import { ListUsersUseCase } from "./application/use-cases/ListUsersUseCase.js";
+import { ListUsersController } from "./presentation/controllers/ListUsersController.js";
 
 const app = express();
 app.use(express.json());
@@ -19,7 +21,12 @@ const createUserUseCase = new CreateUserUseCase(userRepository);
 // 4. Instanciamos o Controller passando a Regra de Negócio
 const createUserController = new CreateUserController(createUserUseCase);
 
+const listUsersController = new ListUsersController(
+  new ListUsersUseCase(userRepository),
+);
+
 // 5. Conectamos no Express
+app.get("/users", (req, res) => listUsersController.handle(req, res));
 app.post("/users", (req, res) => createUserController.handle(req, res));
 
 app.listen(3000, () => {

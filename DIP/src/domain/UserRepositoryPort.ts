@@ -5,4 +5,5 @@ import type { User } from './User.js';
 export interface UserRepositoryPort {
   save(user: User): Promise<void>;
   findByEmail(email: string): Promise<User | null>;
+  findAll(): Promise<User[]>;
 }
